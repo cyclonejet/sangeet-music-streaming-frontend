@@ -15,20 +15,53 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import useUser from '../../data/use-user';
+import { signOut } from '../../libs/auth';
+
 const drawerWidth = 240;
-const navItems = [
+const unAuthItems = [
   { text: 'Home', page: '/' },
   { text: 'Sign In', page: '/sign-in' },
   { text: 'Sign Up', page: '/sign-up' },
   // { text: 'About', page: '/about' },
 ];
 
+const authItems = [
+  {
+    text: 'Player',
+    page: '/player',
+  },
+  {
+    text: 'Profile',
+    page: '/profile',
+  },
+];
+
 export default function TopBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [isAuth, setIsAuth] = React.useState(false);
+  const { user, mutate, loggedOut } = useUser();
+  const [navItems, setNavItems] = React.useState(unAuthItems);
+
+  React.useEffect(() => {
+    console.log(user, loggedOut);
+    if (user && !loggedOut) {
+      setNavItems([...authItems]);
+      setIsAuth(true);
+    } else if (loggedOut) {
+      setIsAuth(false);
+      setNavItems([...unAuthItems]);
+    }
+  }, [user, loggedOut]);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    mutate();
   };
 
   const drawer = (
@@ -47,6 +80,13 @@ export default function TopBar(props) {
             </Link>
           </ListItem>
         ))}
+        {isAuth && (
+          <ListItem disablePadding onClick={handleSignOut}>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary="Sign Out" />
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
@@ -83,6 +123,11 @@ export default function TopBar(props) {
                 </Button>
               </Link>
             ))}
+            {isAuth && (
+              <Button onClick={handleSignOut} sx={{ color: '#fff' }}>
+                Sign Out
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

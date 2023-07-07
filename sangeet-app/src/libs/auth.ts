@@ -19,3 +19,10 @@ export async function signUp({ email, username, password }) {
     credentials: 'include',
   });
 }
+
+export async function signOut() {
+  await fetch(`http://localhost:1337/users/signout`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+}
