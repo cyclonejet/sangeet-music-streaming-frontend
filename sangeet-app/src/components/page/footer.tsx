@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <Container component="footer" sx={{ position: 'fixed', bottom: 0 }}>
+    <Container component="footer" sx={{ width: '100%', height: '100%' }}>
       <Box>
         <Typography variant="h3">Sangeet</Typography>
         <Box component="nav">

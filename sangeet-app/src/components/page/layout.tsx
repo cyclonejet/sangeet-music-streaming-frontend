@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import TopBar from './top-bar';
 import Footer from './footer';
 
@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <CssBaseline />
       <TopBar />
       <main>
-        {children}
+        <Box sx={{ minHeight: '100vh' }}>{children}</Box>
         <Footer />
       </main>
     </ThemeProvider>
