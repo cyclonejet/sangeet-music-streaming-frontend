@@ -77,7 +77,7 @@ export default function TopBar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Link href={item.page}>
+              <Link key={item.page} href={item.page}>
                 <Button key={item.text} sx={{ color: '#fff' }}>
                   {item.text}
                 </Button>
