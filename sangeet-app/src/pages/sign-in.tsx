@@ -34,7 +34,7 @@ export default function SignIn() {
     if (user && !loggedOut) {
       router.push('/player');
     }
-  });
+  }, [user, loggedOut]);
 
   const formik = useFormik({
     initialValues: {
