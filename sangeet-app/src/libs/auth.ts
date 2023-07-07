@@ -8,3 +8,14 @@ export async function signIn({ email, password }) {
     credentials: 'include',
   });
 }
+
+export async function signUp({ email, username, password }) {
+  await fetch(`http://localhost:1337/users/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, username, password }),
+    credentials: 'include',
+  });
+}

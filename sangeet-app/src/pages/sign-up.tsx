@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import {
   Box,
   Button,
@@ -6,9 +11,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useFormik } from 'formik';
-import Link from 'next/link';
-import * as yup from 'yup';
+
+import useUser from '../data/use-user';
+import { signUp } from '../libs/auth';
 
 const validationSchema = yup.object({
   email: yup
@@ -26,6 +31,15 @@ const validationSchema = yup.object({
 });
 
 export default function SignUp() {
+  const { user, mutate, loggedOut } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && !loggedOut) {
+      router.push('/player');
+    }
+  });
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -34,8 +48,13 @@ export default function SignUp() {
       confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      await signUp({
+        email: values.email,
+        username: values.username,
+        password: values.password,
+      });
+      mutate();
     },
   });
   return (
