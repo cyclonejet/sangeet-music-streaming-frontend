@@ -21,20 +21,16 @@ import { signOut } from '../../libs/auth';
 const drawerWidth = 240;
 const unAuthItems = [
   { text: 'Home', page: '/' },
+  { text: 'Search', page: '/search' },
   { text: 'Sign In', page: '/sign-in' },
   { text: 'Sign Up', page: '/sign-up' },
-  // { text: 'About', page: '/about' },
+  { text: 'About', page: '/about' },
 ];
 
 const authItems = [
-  {
-    text: 'Player',
-    page: '/player',
-  },
-  {
-    text: 'Profile',
-    page: '/profile',
-  },
+  { text: 'Player', page: '/player' },
+  { text: 'Search', page: '/search' },
+  { text: 'Profile', page: '/profile' },
 ];
 
 export default function TopBar(props) {
@@ -45,7 +41,6 @@ export default function TopBar(props) {
   const [navItems, setNavItems] = React.useState(unAuthItems);
 
   React.useEffect(() => {
-    console.log(user, loggedOut);
     if (user && !loggedOut) {
       setNavItems([...authItems]);
       setIsAuth(true);
