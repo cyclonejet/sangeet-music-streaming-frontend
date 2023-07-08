@@ -9,6 +9,7 @@ export interface ArtistType {
   name: string;
   picture: string;
   description: string;
+  albums?: AlbumType[];
 }
 
 export interface AlbumType {
@@ -17,7 +18,7 @@ export interface AlbumType {
   duration: number;
   coverArt: string;
   releaseDate: string;
-  artist: ArtistType;
+  artist?: ArtistType;
 }
 
 export default function Home({
