@@ -23,6 +23,8 @@ services:
       - 3000:3000
     networks:
       - my_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   # Add more containers below (nginx, postgres, etc.)
 
