@@ -26,6 +26,16 @@ export default function AlbumCard({ album }: { album: AlbumType }) {
         >
           <Link href={`album/${album.id}`}>{album.name}</Link>
         </Typography>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            ':hover': {
+              textDecoration: 'underline',
+            },
+          }}
+        >
+          <Link href={`artist/${album.artist.id}`}>{album.artist.name}</Link>
+        </Typography>
         <Typography variant="subtitle2">{album.duration}</Typography>
         <Typography variant="subtitle2">{album.releaseDate}</Typography>
       </Box>

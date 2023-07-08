@@ -17,6 +17,7 @@ export interface AlbumType {
   duration: number;
   coverArt: string;
   releaseDate: string;
+  artist: ArtistType;
 }
 
 export default function Home({
