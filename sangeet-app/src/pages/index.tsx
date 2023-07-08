@@ -3,6 +3,7 @@ import { Container, Stack } from '@mui/material';
 
 import ArtistsStack from '../components/ui/ArtistsStack';
 import AlbumsStack from '../components/ui/AlbumsStack';
+import { SongType } from '../types/song.type';
 
 export interface ArtistType {
   id: string;
@@ -19,6 +20,7 @@ export interface AlbumType {
   coverArt: string;
   releaseDate: string;
   artist?: ArtistType;
+  songs?: SongType[];
 }
 
 export default function Home({
